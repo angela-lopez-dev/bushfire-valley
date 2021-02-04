@@ -27,11 +27,15 @@ function preload () {
  
 function create () {
   
+  
   this.dialogs.create();
+  this.dialogs.setText('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',true);
   opts = {boundPluginDimensions : this.dialogs.getDimensions(), boundPlugin : this.dialogs};
   this.videos.create(opts);
+  
   this.videos.add('pereNoel');
   this.videos.play('pereNoel');
+  
 }
 
 function update(){

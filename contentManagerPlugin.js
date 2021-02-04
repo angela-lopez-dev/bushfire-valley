@@ -1,6 +1,4 @@
-/**This class is largely based  on Scott Westover's article for gamedevacademy.
- * The source code is available at https://gamedevacademy.org/create-a-dialog-modal-plugin-in-phaser-3-part-2/.
- */
+
 class ContentManagerPlugin extends Phaser.Plugins.ScenePlugin{
     /**
      * 
@@ -31,7 +29,7 @@ class ContentManagerPlugin extends Phaser.Plugins.ScenePlugin{
         this.closeBtnColor = opts.closeBtnColor || this.default.closeBtnColor;
         this.boundPlugin = opts.boundPlugin || null;
         this.boundPluginDimensions = opts.boundPluginDimensions|| null;
-
+        this.dialogSpeed = opts.dialogSpeed || this.default.dialogSpeed;
         this.addCloseButton = opts.addCloseButton || this.default.addCloseButton;
         
         // if the dialog window is shown
@@ -49,7 +47,7 @@ class ContentManagerPlugin extends Phaser.Plugins.ScenePlugin{
         this.dimensions = this._calculateWindowDimensions(width,height);
         this._createOuterWindow(this.dimensions.x,this.dimensions.y,this.dimensions.rectWidth,this.dimensions.rectHeight);
         
-        if(this.addCloseButton == true){
+        if(this.addCloseButton === true){
             this._createCloseModalButton();
             this._createCloseModalButtonBorder();
         }
@@ -70,13 +68,13 @@ class ContentManagerPlugin extends Phaser.Plugins.ScenePlugin{
     }
 
     _calculateMaxHeight(height,boundWith=null){
-       console.log(boundWith);
+      
         let maxHeight;
         if(boundWith != null)
             maxHeight = height - (this.padding * 2) - boundWith.rectHeight;
         else
             maxHeight = height - (this.padding * 2);
-            console.log(maxHeight);
+            
         return maxHeight;
         
     }
@@ -110,8 +108,8 @@ class ContentManagerPlugin extends Phaser.Plugins.ScenePlugin{
         };
     }
     _createCloseModalButton(){
-        console.log("button");
-        console.log(this.dimensions.rectHeight);
+        
+        
         var self = this;
         this.closeBtn = this.scene.make.text({
           x: this._getGameWidth() - this.padding - 14,
@@ -148,13 +146,15 @@ class ContentManagerPlugin extends Phaser.Plugins.ScenePlugin{
 	
   // Hide/Show the dialog window
   toggleWindow() {
+    console.log("toglling window");
     this.shutdown();
     if(this.boundPlugin != null) this.boundPlugin.shutdown();
   }
 
     shutdown(){
-      if(this.graphics) this.graphics.destroy();
-      console.log("shutting down");//debug
+      this.scene.children.getChildren().map(x => x.destroy());
+      if(this.boundPlugin!= null)
+        this.boundPlugin.shutdown();
     }
 
     destroy(){

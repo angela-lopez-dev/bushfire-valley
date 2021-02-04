@@ -12,7 +12,7 @@ class VideoManagerPlugin extends ContentManagerPlugin{
             closeBtnColor :  'darkgoldenrod',
             setWidthToMax : true, //video should occupy the whole width of the game
             setHeightToMax : true,//same for the height
-            addCloseButton : true 
+            addCloseButton : true
         });
 
         this.type = "VIDEO";
@@ -70,8 +70,7 @@ class VideoManagerPlugin extends ContentManagerPlugin{
     create(opts){
         super.create(opts);
         this._createCloseModalButton();
-        console.log(this.padding);
-        console.log(this.addCloseButton);
+        
     }
 
     shutdown(){
